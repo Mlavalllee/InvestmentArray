@@ -9,8 +9,6 @@ let menuEl = document.getElementById("menu");
 // Global Variable
 let accounts = [];
 let maxAmount = 5000; // account values should be b/t 0 and max
-let count = 0;
-let AccountsOpen = 200;
 
 // Display Data
 
@@ -67,13 +65,13 @@ function mainMenu() {
 // ******************************************************
 function countRange() {
   // Output the number of accounts with amounts between $2,000 and $4,000, inclusive
-  count = 0;
+   let count = 0;
     for(let i = 0; i < accounts.length; i++) {
       if(accounts[i] >= 2000 && accounts[i] <= 4000) {
         count++;
       }
     }
-  outputEl.innerHTML = count + " " + "accounts have been evaluated to be worth between $2000 and $4000 dollars";
+  outputEl.innerHTML = count + " accounts have been evaluated to be worth between $2000 and $4000 dollars";
 }
 
 function generousDonor() {
@@ -81,14 +79,14 @@ function generousDonor() {
   // account that has less than $2000. 
   // Modify the investment account array to apply this donation.
   // Output the total amount of money that was donated.
-  count = 0;
+  let donation = 0;
   for(let i = 0; i < accounts.length; i++) {
     if(accounts[i] < 2000) {
       accounts[i] = accounts[i] + 500;
-      count = count + 500;
+      donation = donation + 500;
     }
   }
-outputEl.innerHTML = "$" + count + " " + "in total has been donated to invesments under $2000";
+outputEl.innerHTML = "$" + donation + " in total has been donated to invesments under $2000";
 }
 
 function hackerAttack() {
@@ -96,13 +94,13 @@ function hackerAttack() {
   // Modify the investment account array to apply this theft.
   // Output the total amount that was stolen.
   let stolen = 0;
-  count = 0;
+   let money = 0;
   for(let i = 0; i < accounts.length; i++) {
     stolen = accounts[i] * 0.05;
     accounts[i] = accounts[i] - stolen;
-    count = count + stolen;
+    money = money + stolen;
   }
-  outputEl.innerHTML = "A Hacker stole a total of " + "$" + count + " from invsesments!";
+  outputEl.innerHTML = "A Hacker stole a total of $" +  money + " from invsetments!";
 }
 
 function investmentStats() {
@@ -111,8 +109,9 @@ function investmentStats() {
   let Max = 0;
   let Min = 5000;
   let Avg = 0;
-  count = 0;
   let AvgCount = 0;
+  let AccountsOpen = accounts.length;
+  count = 0;
   for (let i = 0; i < accounts.length; i++) {
     count = accounts[i];
     AvgCount = AvgCount + accounts[i];
@@ -130,23 +129,21 @@ function addAccount() {
   // Prompt for a new account amount and add this to the invesment account
   // array. Output a confirmation that a new account was added with an
   // opening amount of _______.
-  let amount
+  let amount = 0;
   amount = Math.floor(Math.random()* 5001);
-  accounts.push(amount)
-  AccountsOpen++;
+  accounts.push(amount);
   outputEl.innerHTML = "an account with $" + amount + " has been added.";
 }
 
 function removeLow() {
   // Remove all accounts that are below $500.
   // Output how many accounts were removed.
-  count = 0;
+   let count = 0;
   for (let i = 0; i < accounts.length; i++) {
     if(accounts[i] < 500 ){
       accounts.splice(i, 1);
       count++;
-      AccountsOpen--;
-      i = i - 1;
+      i--;
     }
   }
   outputEl.innerHTML = count + " accounts under $500 removed";
@@ -184,10 +181,10 @@ function robinHood() {
     }
   }
   if (under1000 >=1 && StolenFrom >=1){
-    outputEl.innerHTML = "Robin Hood has stolen $" + StolenTotal + " from "  + StolenFrom + " accounts and handed out $" + Stolen + " evenly between to a total of " +under1000 + " accounts under $1000";
+    outputEl.innerHTML = "Robin Hood has stolen $" + StolenTotal + " from "  + StolenFrom + " accounts and handed out $" + Stolen + " evenly between to a total of " + under1000 + " accounts that are under under $1000";
   } else if (under1000 <= 0)  {
-    outputEl.innerHTML = "there where no accounts under $1000 left to give to so robin hood didn't steal anything."
+    outputEl.innerHTML = "there where no poor accounts under $1000 left to give to so Robin Hood didn't steal anything."
   } else {
-    outputEl.innerHTML = "There where no accounts above $4000 left for robin hood to steal from."
+    outputEl.innerHTML = "There where no rich accounts above $4000 left for Robin Hood to steal from."
   }
 }    
